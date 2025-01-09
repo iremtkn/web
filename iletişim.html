@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitapların Büyülü Dünyası</title>
+    <link rel="stylesheet" type="text/CSS" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Kitapların Büyülü Dünyası</h1>
+    </header>
+    <nav>
+        <a href="index.html">Ana Sayfa</a> |
+        <a href="hakkımızda.html">Hakkımızda</a> |
+        <a href="projeler.html">Projeler</a> |
+        <a href="iletişim.html">İletişim</a> 
+       </nav>
+    <main>
+    <div class="form-container">
+        <h2>İletişim Formu</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">İsim:</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-posta:</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefon Numarası:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+                <label for="message">Mesaj:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <div class="error" id="messageError"></div>
+            </div>
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+    </main>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            const nameInput = document.getElementById("name");
+            const nameError = document.getElementById("nameError");
+            if (nameInput.value.trim() === "") {
+                isValid = false;
+                nameError.textContent = "İsim alanı zorunludur.";
+            } else {
+                nameError.textContent = "";
+            }
+
+            const emailInput = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+            if (!emailPattern.test(emailInput.value.trim())) {
+                isValid = false;
+                emailError.textContent = "Geçerli bir e-posta adresi giriniz.";
+            } else {
+                emailError.textContent = "";
+            }
+
+            const phoneInput = document.getElementById("phone");
+            const phoneError = document.getElementById("phoneError");
+            const phonePattern = /^\+90\s\d{3}\s\d{3}\s\d{4}$/;
+            if (phonePattern.test(phoneInput.value.trim())) {
+                phoneError.textContent = "";
+                alert("Telefon numarası geçerlidir!");
+            } else {
+                phoneError.textContent = "Geçerli bir telefon numarası formatı giriniz: +90 555 555 5555";
+            }
+     
+            const messageInput = document.getElementById("message");
+            const messageError = document.getElementById("messageError");
+            if (messageInput.value.trim() === "") {
+                isValid = false;
+                messageError.textContent = "Mesaj alanı zorunludur.";
+            } else {
+                messageError.textContent = "";
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+    <footer>
+        &copy; 2025 Kitapların Büyülü Dünyası.
+    </footer>
+</body>
+</html>
